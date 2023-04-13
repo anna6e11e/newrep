@@ -24,6 +24,8 @@ router.delete('/:id', (req, res) => {
       Controllers.userController.deleteUser(userId, res);
     });
 
+  router.post('/users/:id/liked', 
+  UserController.updateLikedProducts);
 
 
 

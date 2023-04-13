@@ -16,7 +16,13 @@ function SignupForm() {
       email: email,
       password: password
     })
-      .then(response => console.log(response.data));
+    .then(response => {
+      navigate('/account')
+    })
+    .catch(error => {   
+      setloginResult('error occured signing up')
+      console.log(error); 
+    })
   }
 
   /*This code defines the handleSubmit function that is called when the form is submitted. 
