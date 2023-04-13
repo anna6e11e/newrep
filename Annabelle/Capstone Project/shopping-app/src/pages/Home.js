@@ -4,7 +4,10 @@ import Opener from "../components/Opener";
 function Home() {
     return(
 <div>
-
+<div style={{fontFamily:'Montserrat'}}>
+      <Navbar />
+      <br/></div>,
+      
 <Opener/>
 <br/>
 <br/>

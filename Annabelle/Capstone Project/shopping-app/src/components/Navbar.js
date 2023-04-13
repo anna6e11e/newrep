@@ -1,20 +1,8 @@
-import React, { useState } from "react";
-import { Navbar, Container, Nav, NavDropdown, Badge, Button } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
+import { FaHeart } from 'react-icons/fa';
 
 function NavScrollExample() {
-  const [cartItems, setCartItems] = useState([]);
-
-  const handleAddToCart = (item) => {
-    setCartItems([...cartItems, item]);
-  };
-
-  const handleRemoveFromCart = (itemIndex) => {
-    const newCartItems = [...cartItems];
-    newCartItems.splice(itemIndex, 1);
-    setCartItems(newCartItems);
-  };
-
-  const cartTotal = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <Navbar bg="light" expand="lg" style={{ fontFamily: 'Montserrat' }}>
@@ -34,41 +22,14 @@ function NavScrollExample() {
               <NavDropdown.Item href="/Lips"> LIPS </NavDropdown.Item>
               <NavDropdown.Item href="/Eyebrows"> EYEBROWS </NavDropdown.Item>
             </NavDropdown>
-          
-            <NavDropdown
-              title="ACCOUNT"
-              id="navbarScrollingDropdownAccount"
-              style={{ marginLeft: "auto" }}
-            >
-              <NavDropdown.Item href="/Signup"> SIGN UP </NavDropdown.Item>
-              <NavDropdown.Item href="/Login"> LOGIN </NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown
-              title={
-                <Button href="/cart">
-                  <Badge bg="secondary">{cartTotal}</Badge>
-                  <i className="bi bi-cart-fill" style={{ marginLeft: "20px" }}></i>
-                </Button>
-              }
-              id="navbarScrollingDropdownCart"
-            >
-              {cartItems.length === 0 ? (
-                <NavDropdown.Item>Cart is empty</NavDropdown.Item>
-              ) : (
-                cartItems.map((item, index) => (
-                  <NavDropdown.Item key={index}>
-                    {item.quantity} x {item.name} - ${item.price * item.quantity}
-                    <i
-                      className="bi bi-trash-fill"
-                      style={{ marginLeft: "20px", cursor: "pointer" }}
-                      onClick={() => handleRemoveFromCart(index)}
-                    ></i>
-                  </NavDropdown.Item>
-                ))
-              )}
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="/cart">View Cart</NavDropdown.Item>
-            </NavDropdown>
+              
+    
+              <NavDropdown title="MY ACCOUNT" id="navbarScrollingDropdownAccount" style={{ marginLeft: "auto" }}>
+                <NavDropdown.Item href="/cart">MY CART</NavDropdown.Item>
+                <NavDropdown.Item href="/liked">LIKED ITEMS</NavDropdown.Item>
+              </NavDropdown>
+  
+
           </Nav>
         </Navbar.Collapse>
       </Container>

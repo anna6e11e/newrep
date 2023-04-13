@@ -28,7 +28,7 @@ function ChangeUsernameForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Change name</h2>
+      <h2>Change name?</h2>
       <label>
         Current name: {user.name}
       </label>

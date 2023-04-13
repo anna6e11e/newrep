@@ -7,6 +7,8 @@ import Lips from '../pages/Lips';
 import Skin from '../pages/Skin';
 import Account from '../pages/Account';
 import Eyebrows from '../pages/Eyebrows';
+import Landing from '../pages/Landing';
+import Cart from '../pages/Cart';
 
 export const AppRoutes = (props) => {
 
@@ -22,7 +24,9 @@ export const AppRoutes = (props) => {
             <Route path='/lips' element={<Lips {...props} />} />
             <Route path='/skin' element={<Skin {...props} />} />
             <Route path='/eyebrows' element={<Eyebrows {...props} />} />
-            <Route path='*' element={<Eyebrows {...props} />} />
+            <Route path='/cart' element={<Cart {...props} />} />
+            <Route path='*' element={<Landing {...props} />} />
+
         </Routes>
     )
 }

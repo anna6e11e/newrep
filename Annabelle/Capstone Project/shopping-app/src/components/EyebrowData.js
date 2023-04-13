@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, Typography, Grid, TextField } from "@mui/material";
+import { FaHeart } from "react-icons/fa";
 
 function MakeupCard({ makeup }) {
   const [liked, setLiked] = useState(false);
-  const [likedMakeup, setLikedMakeup] = useState([]); 
+  const [likedMakeup, setLikedMakeup] = useState([]);
 
   const handleLikeClick = () => {
     if (liked) {
@@ -21,55 +22,59 @@ function MakeupCard({ makeup }) {
         <Typography variant="h5" style={{fontFamily:'Montserrat', fontWeight:'bold', textAlign:'center', marginTop:'10px'}}>{makeup.name}</Typography>
         <Typography variant="body1" style={{fontFamily:'Montserrat', textAlign:'center',}}>{makeup.brand}</Typography>
         <Typography variant="body2" style={{fontFamily:'Montserrat',textAlign:'center',}}>{makeup.price}</Typography>
-        <button onClick={handleLikeClick}>{liked ? "Unlike" : "Like"}</button>
+        <button onClick={handleLikeClick} style={{ border: 'none', backgroundColor: 'transparent' }}>
+  {liked ? (
+    <FaHeart style={{ color: "purple", fontSize: '1.5rem' }} />
+  ) : (
+    <FaHeart style={{ color: "pink", fontSize: '1.5rem' }} />
+  )}
+</button>
+
       </CardContent>
     </Card>
   );
 }
 
+function CardData() {
+  const [makeupData, setMakeupData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [likedMakeup, setLikedMakeup] = useState([]);
 
-  function CardData() {
-    const [makeupData, setMakeupData] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [likedMakeup, setLikedMakeup] = useState([]);
-  
-  
-    useEffect(() => {
-      fetch("https://makeup-api.herokuapp.com/api/v1/products.json")
-        .then((response) => response.json())
-        .then((data) => setMakeupData(data));
-    }, []);
-  
-    const filteredMakeupData = makeupData.filter(
-      (makeup) =>
-        ["eyebrow"].includes(makeup.product_type) &&
-        makeup.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        (likedMakeup.length === 0 || likedMakeup.includes(makeup.id))
-    );
-    
-  
-    const handleSearchChange = (event) => {
-      setSearchTerm(event.target.value);
-    };
-  
-    return (
-      <div>
-        <TextField
-          label="Search"
-          variant="outlined"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          style={{ marginBottom: "20px", marginLeft:'20px' }}
-        />
-          <Grid container spacing={2} style={{display:'flex', justifyContent:'center'}}>
-          {filteredMakeupData.map((makeup) => (
-            <Grid item xs={12} sm={6} md={3} key={makeup.id}>
-              <MakeupCard makeup={makeup} />
-            </Grid>
-          ))}
-        </Grid>
-      </div>
-    );
-  }
-  
-  export default CardData;
+  useEffect(() => {
+    fetch("https://makeup-api.herokuapp.com/api/v1/products.json")
+      .then((response) => response.json())
+      .then((data) => setMakeupData(data));
+  }, []);
+
+  const filteredMakeupData = makeupData.filter(
+    (makeup) =>
+      ["eyebrow"].includes(makeup.product_type) &&
+      makeup.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      (likedMakeup.length === 0 || likedMakeup.includes(makeup.id))
+  );
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  return (
+    <div>
+      <TextField
+        label="Search"
+        variant="outlined"
+        value={searchTerm}
+        onChange={handleSearchChange}
+        style={{ marginBottom: "20px", marginLeft:'20px' }}
+      />
+        <Grid container spacing={2} style={{display:'flex', justifyContent:'center'}}>
+        {filteredMakeupData.map((makeup) => (
+          <Grid item xs={12} sm={6} md={3} key={makeup.id}>
+            <MakeupCard makeup={makeup} />
+          </Grid>
+        ))}
+      </Grid>
+    </div>
+  );
+}
+
+export default CardData;

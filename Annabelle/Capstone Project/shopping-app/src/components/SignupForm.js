@@ -19,6 +19,10 @@ function SignupForm() {
       .then(response => console.log(response.data));
   }
 
+  /*This code defines the handleSubmit function that is called when the form is submitted. 
+  It prevents the default behavior of the form and uses axios to send a post request to the backend API, 
+  passing the values entered by the user in the name, email, and password fields.*/
+
   return (
     <body style={{backgroundImage:'url("https://e1.pxfuel.com/desktop-wallpaper/28/336/desktop-wallpaper-pin-on-makeup-aesthetic-makeup.jpg")', height: '100%', width: '100%', backgroundSize: 'cover'}}>
     <Container className="d-flex justify-content-center mt-5">

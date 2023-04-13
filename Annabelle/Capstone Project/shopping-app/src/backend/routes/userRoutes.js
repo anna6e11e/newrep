@@ -23,7 +23,7 @@ router.delete('/:id', (req, res) => {
       const userId = req.params.id;
       Controllers.userController.deleteUser(userId, res);
     });
-    
+
 
 
 

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, Typography, Grid, TextField } from "@mui/material";
+import { FaHeart } from "react-icons/fa";
 
 function MakeupCard({ makeup }) {
   const [liked, setLiked] = useState(false);
   const [likedMakeup, setLikedMakeup] = useState([]);
-  const [cart, setCart] = useState([]);
 
   const handleLikeClick = () => {
     if (liked) {
@@ -15,19 +15,20 @@ function MakeupCard({ makeup }) {
     setLiked(!liked);
   };
 
-  const handleAddToCartClick = () => {
-    setCart((prevCart) => [...prevCart, makeup]);
-  };
-
   return (
     <Card className="card-single" style={{ backgroundColor:'#f5f0f4',display:'flex', justifyContent: 'center', alignItems:'center', width:'300px', alignContent:'center', fontFamily:'Montserrat' }}> 
       <CardContent>
-        <img src={makeup.image_link} alt={makeup.name} style={{ height:'200px' }} /><br/>
-        <Typography variant="h5" style={{fontFamily:'Montserrat', fontWeight:'bold', textAlign:'center', marginTop:'10px', fontSize:'15px'}}>{makeup.name}</Typography>
+      <img src={makeup.image_link} alt={makeup.name} style={{ height:'200px' }} /><br/>
+        <Typography variant="h5" style={{fontFamily:'Montserrat', fontWeight:'bold', textAlign:'center', marginTop:'10px'}}>{makeup.name}</Typography>
         <Typography variant="body1" style={{fontFamily:'Montserrat', textAlign:'center',}}>{makeup.brand}</Typography>
         <Typography variant="body2" style={{fontFamily:'Montserrat',textAlign:'center',}}>{makeup.price}</Typography>
-        <button onClick={handleLikeClick}>{liked ? "Unlike" : "Like"}</button>
-        <button onClick={handleAddToCartClick}>Add to Cart</button>
+        <button onClick={handleLikeClick} style={{ border: 'none', backgroundColor: 'transparent' }}>
+  {liked ? (
+    <FaHeart style={{ color: "purple", fontSize: '1.5rem' }} />
+  ) : (
+    <FaHeart style={{ color: "pink", fontSize: '1.5rem' }} />
+  )}
+</button>
       </CardContent>
     </Card>
   );

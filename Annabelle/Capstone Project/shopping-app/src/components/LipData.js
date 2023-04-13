@@ -1,14 +1,34 @@
 import { useState, useEffect } from "react";
-import { Card, CardContent, Typography, Grid } from "@mui/material";
+import { Card, CardContent, Typography, Grid, TextField } from "@mui/material";
+import { FaHeart } from "react-icons/fa";
 
 function MakeupCard({ makeup }) {
-    return (
-      <Card className="card-single"  style={{ backgroundColor:'#f5f0f4',display:'flex', justifyContent: 'center', alignItems:'center', width:'300px', alignContent:'center', fontFamily:'Montserrat' }}> 
-        <CardContent>
-        <img src={makeup.image_link} alt={makeup.name} style={{ height:'200px' }} /><br/>
-          <Typography variant="h5" style={{fontFamily:'Montserrat', fontWeight:'bold', textAlign:'center', marginTop:'10px'}}>{makeup.name}</Typography>
-          <Typography variant="body1" style={{fontFamily:'Montserrat', textAlign:'center',}}>{makeup.brand}</Typography>
-          <Typography variant="body2" style={{fontFamily:'Montserrat',textAlign:'center',}}>{makeup.price}</Typography>
+  const [liked, setLiked] = useState(false);
+  const [likedMakeup, setLikedMakeup] = useState([]);
+
+  const handleLikeClick = () => {
+    if (liked) {
+      setLikedMakeup((prevLiked) => prevLiked.filter((id) => id !== makeup.id));
+    } else {
+      setLikedMakeup((prevLiked) => [...prevLiked, makeup.id]);
+    }
+    setLiked(!liked);
+  };
+
+  return (
+    <Card className="card-single" style={{ backgroundColor:'#f5f0f4',display:'flex', justifyContent: 'center', alignItems:'center', width:'300px', alignContent:'center', fontFamily:'Montserrat' }}> 
+      <CardContent>
+      <img src={makeup.image_link} alt={makeup.name} style={{ height:'200px' }} /><br/>
+        <Typography variant="h5" style={{fontFamily:'Montserrat', fontWeight:'bold', textAlign:'center', marginTop:'10px'}}>{makeup.name}</Typography>
+        <Typography variant="body1" style={{fontFamily:'Montserrat', textAlign:'center',}}>{makeup.brand}</Typography>
+        <Typography variant="body2" style={{fontFamily:'Montserrat',textAlign:'center',}}>{makeup.price}</Typography>
+        <button onClick={handleLikeClick} style={{ border: 'none', backgroundColor: 'transparent' }}>
+  {liked ? (
+    <FaHeart style={{ color: "purple", fontSize: '1.5rem' }} />
+  ) : (
+    <FaHeart style={{ color: "pink", fontSize: '1.5rem' }} />
+  )}
+</button>
         </CardContent>
       </Card>
     );
