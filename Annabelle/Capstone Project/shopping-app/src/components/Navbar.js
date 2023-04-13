@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
 import { FaHeart } from 'react-icons/fa';
+import { UserContext } from "../context/UserContext";
+import { Link } from "react-router-dom";
 
 function NavScrollExample() {
+  const { user } = useContext(UserContext);
 
   return (
     <Navbar bg="light" expand="lg" style={{ fontFamily: 'Montserrat' }}>
@@ -15,21 +18,26 @@ function NavScrollExample() {
             style={{ maxHeight: '100px', width:'100%', alignItems: 'center'}}
             navbarScroll
           >
-            <Nav.Link href="/Home">HOME</Nav.Link>
+            <Nav.Link as={Link} to="/Home">HOME</Nav.Link>
             <NavDropdown title="SHOP" id="navbarScrollingDropdownShop">
-              <NavDropdown.Item href="/Eyes"> EYES </NavDropdown.Item>
-              <NavDropdown.Item href="/Skin"> SKIN </NavDropdown.Item>
-              <NavDropdown.Item href="/Lips"> LIPS </NavDropdown.Item>
-              <NavDropdown.Item href="/Eyebrows"> EYEBROWS </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/Eyes"> EYES </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/Skin"> SKIN </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/Lips"> LIPS </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/Eyebrows"> EYEBROWS </NavDropdown.Item>
             </NavDropdown>
               
-    
+            { user ? 
               <NavDropdown title="MY ACCOUNT" id="navbarScrollingDropdownAccount" style={{ marginLeft: "auto" }}>
-                <NavDropdown.Item href="/cart">MY CART</NavDropdown.Item>
-                <NavDropdown.Item href="/liked">LIKED ITEMS</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/account">MY ACCOUNT</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/cart">MY CART</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/liked">LIKED ITEMS</NavDropdown.Item>
               </NavDropdown>
-  
-
+            : 
+            <NavDropdown title="NEW USER" id="navbarScrollingDropdownAccount" style={{ marginLeft: "auto" }}>
+              <NavDropdown.Item as={Link} to="/login">LOGIN</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/signup">SIGNUP</NavDropdown.Item>
+            </NavDropdown>
+}
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -24,8 +24,7 @@ router.delete('/:id', (req, res) => {
       Controllers.userController.deleteUser(userId, res);
     });
 
-  router.post('/users/:id/liked', 
-  UserController.updateLikedProducts);
+  //router.post('/users/:id/liked', Controllers.userController.updateLikedProducts); // function doesn't exist yet
 
 
 

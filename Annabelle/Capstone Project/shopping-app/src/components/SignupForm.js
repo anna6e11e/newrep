@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import '../css/home.css';
+import { useNavigate } from 'react-router-dom';
 
 function SignupForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginResult, setloginResult] = useState('')
+
+  const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();

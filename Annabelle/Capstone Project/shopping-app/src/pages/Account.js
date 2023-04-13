@@ -23,10 +23,6 @@ function UserPage() {
       });
   };
 
-  if (!user) {
-    return null;
-  }
-
   return (
     <body style={{fontFamily:'Montserrat',backgroundImage:'url("https://e1.pxfuel.com/desktop-wallpaper/28/336/desktop-wallpaper-pin-on-makeup-aesthetic-makeup.jpg")', height: '100%', width: '100%', backgroundSize: 'cover'}}>
       <Navbar />

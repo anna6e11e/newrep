@@ -7,6 +7,7 @@ export const UserProvider = ({ children }) => {
 
   const updateUser = (userData) => {
     setUser(userData);
+//    localStorage.setItem('user', JSON.stringify(userData))
   }
 
   return (

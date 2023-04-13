@@ -9,6 +9,8 @@ function MakeupCard({ makeup, likedMakeup, setLikedMakeup }) {
   const [liked, setLiked] = useState(false);
   const { addToCart } = useContext(CartContext);
   const { user } = useContext(UserContext); // get user information from context
+  //const user = JSON.parse(localStorage.getItem('user'))
+
 
   const handleAddToCartClick = () => {
     addToCart(makeup);
@@ -22,8 +24,7 @@ function MakeupCard({ makeup, likedMakeup, setLikedMakeup }) {
     }
     setLiked(!liked);
     
- console.log(user.id)  
-    fetch(`/api/users/${user.id}/liked`, {
+    fetch(`http://localhost:8081/api/users/${user._id}/liked`, {
 
       method: 'POST',
       headers: {
